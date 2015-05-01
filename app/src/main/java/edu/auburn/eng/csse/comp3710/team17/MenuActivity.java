@@ -22,14 +22,6 @@ public class MenuActivity extends FragmentActivity {
         setContentView(R.layout.activity_menu);
         /** final FragmentActivity thisActivity = this; */
         viewScoresButton = (Button) findViewById(R.id.scoreboardButton);
-        /**
-        viewScoresButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(thisActivity, ViewScoreboardActivity.class);
-                startActivity(intent);
-            }
-        }); */
 
     }
 
@@ -47,6 +39,11 @@ public class MenuActivity extends FragmentActivity {
 
     public void viewScore(View view) {
         Intent intent = new Intent(this, ViewScoreboardActivity.class);
+        startActivity(intent);
+    }
+
+    public void versusMode (View view) {
+        Intent intent = new Intent(this, VersusMode.class);
         startActivity(intent);
     }
 

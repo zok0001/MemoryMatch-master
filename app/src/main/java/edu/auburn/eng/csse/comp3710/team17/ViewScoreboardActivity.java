@@ -36,46 +36,48 @@ public class ViewScoreboardActivity extends FragmentActivity {
     private String topViewString;
 
     public void readScores() {
-        Scanner scoreScan = null;
-        try {
-            scoreScan = new Scanner(hiScoreFile);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
         String scoreboard = "";
-        if (scoreScan != null) {
-            int first = 0;
-            boolean empty = false;
+        if (hiScoreFile.exists()) {
+            Scanner scoreScan = null;
+            try {
+                scoreScan = new Scanner(hiScoreFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-            while (scoreScan.hasNextLine()) {
-                String line = scoreScan.nextLine();
-                if ((first == 0) && (line.equals("")) && !empty) {
+            if (scoreScan != null) {
+                int first = 0;
+                boolean empty = false;
+
+                while (scoreScan.hasNextLine()) {
+                    String line = scoreScan.nextLine();
+                    if ((first == 0) && (line.equals("")) && !empty) {
+                        scoreboard = "No scores yet!\nBe the first!";
+                        empty = true;
+                    } else {
+                        numTopScores++;
+                        Scanner lineScan = new Scanner(line);
+                        String name = lineScan.next();
+                        int score = lineScan.nextInt();
+                        TopScore nextScore = new TopScore(name, score);
+                        topScores.add(nextScore);
+                    }
+                    first++;
+                }
+                if (!empty) {
+                    if (mode == 1) scoreboard = "NAME\t\tTRIES\n";
+                    else scoreboard = "NAME\t\tTIME\n";
+
+                    for (int i = 0; i < numTopScores; i++) {
+                        TopScore curScore = topScores.get(i);
+                        scoreboard += (i + 1) + ") " + curScore.getName() + "\t\t" + curScore.getScore() + "\n";
+                    }
+                }
+                if (topScores.isEmpty()) {
                     scoreboard = "No scores yet!\nBe the first!";
-                    empty = true;
-                } else {
-                    numTopScores++;
-                    Scanner lineScan = new Scanner(line);
-                    String name = lineScan.next();
-                    int score = lineScan.nextInt();
-                    TopScore nextScore = new TopScore(name, score);
-                    topScores.add(nextScore);
                 }
-                first++;
-            }
-            if (!empty) {
-                if (mode == 1) scoreboard = "NAME\t\tTRIES\n";
-                else scoreboard = "NAME\t\tTIME\n";
 
-                for (int i = 0; i < numTopScores; i++) {
-                    TopScore curScore = topScores.get(i);
-                    scoreboard += (i + 1) + ") " + curScore.getName() + "\t\t" + curScore.getScore() + "\n";
-                }
             }
-            if (topScores.isEmpty()) {
-                scoreboard = "No scores yet!\nBe the first!";
-            }
-
         }
         if (topScores.isEmpty()) {
             scoreboard = "No scores yet!\nBe the first!";

@@ -41,6 +41,11 @@
             android:label="@string/scoreboardActivity" >
 
         </activity>
+
+        <activity android:name="edu.auburn.eng.csse.comp3710.team17.VersusMode"
+            android:label="@string/versusMode" >
+
+        </activity>
     </application>
 
 </manifest>

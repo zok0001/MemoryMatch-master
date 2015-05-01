@@ -32,7 +32,7 @@
             android:layout_width="180dp"
             android:layout_height="50dp"
             android:id="@+id/timedButton"
-            android:onClick= "runTimedGame"
+            android:onClick="runTimedGame"
             android:contentDescription="@string/timed"
             android:text="@string/timed"
             android:layout_gravity="center_horizontal"
@@ -41,7 +41,9 @@
             android:layout_width="180dp"
             android:layout_height="50dp"
             android:id="@+id/versusButton"
+            android:onClick="versusMode"
             android:text="@string/versus"
+            android:contentDescription="@string/versus"
             android:layout_gravity="center_horizontal"
             />
         <Button
