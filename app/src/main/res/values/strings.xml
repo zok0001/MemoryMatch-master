@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">AuburnMatch</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_memory_game">MemoryGame</string>
+    <string name="timed">Timed Mode</string>
+    <string name="classic">Classic Mode</string>
+    <string name="members_class">    Auburn University \n   COMP3710\n   Zack King \n   Garret McCaffery \n   Walton Macey</string>
+    <string name="addScore">Add your score!</string>
+    <string name="initials">Initials: </string>
+    <string name="main_menu">Back to Main Menu</string>
+    <string name="versus">Versus Mode</string>
+    <string name="scoreboard">View Scores</string>
+    <string name="scoreboardActivity">ViewScoreboardActivity</string>
+    <color name="backgroundColor">#496e9c</color>
+
+    <string-array name="difficulty">
+        <item>Select your difficulty here</item>
+        <item>Easy</item>
+        <item>Normal</item>
+        <item>Hard</item>
+    </string-array>
+
+    <string-array name="scoreboards">
+        <item>Select game type</item>
+        <item>Classic Easy</item>
+        <item>Classic Normal</item>
+        <item>Classic Hard</item>
+        <item>Timed Easy</item>
+        <item>Timed Normal</item>
+        <item>Timed Hard</item>
+    </string-array>
+</resources>

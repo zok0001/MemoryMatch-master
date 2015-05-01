@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ffffff">
+
+    <ImageView
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:src="@drawable/auicon"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:background="#00ffffff">
+
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:id="@+id/classicButton"
+            android:onClick= "runClassicGame"
+            android:contentDescription="@string/classic"
+            android:text="@string/classic"
+            android:layout_gravity="center_horizontal"
+             />
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:id="@+id/timedButton"
+            android:onClick= "runTimedGame"
+            android:contentDescription="@string/timed"
+            android:text="@string/timed"
+            android:layout_gravity="center_horizontal"
+             />
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:id="@+id/versusButton"
+            android:text="@string/versus"
+            android:layout_gravity="center_horizontal"
+            />
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:id="@+id/scoreboardButton"
+            android:onClick= "viewScore"
+            android:text="@string/scoreboard"
+            android:contentDescription="@string/scoreboard"
+            android:layout_gravity="center_horizontal"
+            />
+
+        </LinearLayout>
+
+
+</RelativeLayout>
