@@ -1,0 +1,34 @@
+@startuml
+title MemoryMatch SSD: Play Versus Mode
+
+Player1 -> MemoryMatchApp : start
+Player1 <-- MemoryMatchApp : main menu
+Player1 -> MemoryMatchApp : select versus mode
+loop while cards in play
+loop while player1's turn
+Player1 -> MemoryMatchApp: select first card
+Player1 <-- MemoryMatchApp : first card image
+Player1 -> MemoryMatchApp : select second card
+Player1 <-- MemoryMatchApp : second card image
+alt cards match
+Player1 <-- MemoryMatchApp : removed cards
+else cards do not match
+Player1 <-- MemoryMatchApp : turned over cards
+Player2 <-- MemoryMatchApp : player two's turn
+end
+end
+loop while player2's turn
+Player2 -> MemoryMatchApp: select first card
+Player2 <-- MemoryMatchApp : first card image
+Player2 -> MemoryMatchApp : select second card
+Player2 <-- MemoryMatchApp : second card image
+alt cards match
+Player2 <-- MemoryMatchApp : removed cards
+else cards do not match
+Player2 <-- MemoryMatchApp : turned over cards
+Player1 <-- MemoryMatchApp : player one's turn
+end
+end
+end
+
+@enduml

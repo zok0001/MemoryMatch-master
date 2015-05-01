@@ -1,0 +1,21 @@
+@startuml
+partition Activity1 {
+(*)-->Splash
+}
+partition Activity2 {
+Splash --> MainMenu
+}
+partition Activity3 {
+MainMenu --> MemoryGame
+}
+-->(*)
+partition Activity4 {
+MainMenu --> HighScoreArchive
+HighScoreArchive --> MainMenu
+}
+
+
+
+
+
+@enduml
