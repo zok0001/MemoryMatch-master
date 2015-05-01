@@ -1,0 +1,14 @@
+@startuml
+title MemoryMatch SSD: View High Scores
+
+User -> MemoryMatchApp : start
+User <-- MemoryMatchApp : main menu
+User -> MemoryMatchApp : view high scores
+User <-- MemoryMatchApp : list of game modes/difficulties
+User -> MemoryMatchApp : select game mode/difficulty
+MemoryMatchApp -> HighScoreArchive : get high scores
+MemoryMatchApp <-- HighScoreArchive : high scores for selected mode
+User <-- MemoryMatchApp : high scores for selected mode
+
+
+@enduml
