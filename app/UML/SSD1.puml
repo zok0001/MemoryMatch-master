@@ -1,9 +1,10 @@
 @startuml
-title MemoryMatch SSD
+title MemoryMatch SSD: Play Classic or Timed Mode
 
 User -> MemoryMatchApp : start
-User <-- MemoryMatchApp : display start menu
+User <-- MemoryMatchApp : main menu
 User -> MemoryMatchApp : select game mode
+User <-- MemoryMatchApp : list of difficulties
 User -> MemoryMatchApp : select difficulty
 User <-- MemoryMatchApp : game board
 loop until all cards matched
@@ -17,8 +18,12 @@ else cards do not match
 User <-- MemoryMatchApp : turned over cards
 end
 end
-User -> MemoryMatchApp : submit score
-User <-- MemoryMatchApp : top scores
+alt score good enough to be saved
+User -> MemoryMatchApp : enter initials
+MemoryMatchApp -> HighScoreArchive : add current score
+MemoryMatchApp <-- HighScoreArchive : score added successfully
+end
+
 
 
 @enduml

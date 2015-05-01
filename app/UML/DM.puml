@@ -1,18 +1,23 @@
 @startuml
-title MemoryMatch Use Case
+title MemoryMatch Domain Model
 left to right direction
 actor user
+actor user2
+actor high_score_archive
 rectangle {
 usecase "select game mode"
-usecase "select difficulty"
 usecase "play game"
 usecase "submit score"
+usecase "view high scores"
 user -- (select game mode)
-user -- (select difficulty)
 user -- (play game)
 user -- (submit score)
-(play game) .> (choose card) : <<includes>>
-(choose card) .> (choose first card) : <<includes>>
-(choose card) .> (choose second card) : <<includes>>
+high_score_archive -- (submit score)
+user -- (view high scores)
+high_score_archive -- (view high scores)
+(play game) .> (play local versus) : <<includes>>
+(play game) .> (play classic) : <<includes>>
+(play game) .> (play timed) : <<includes>>
+user2 -- (play local versus)
 }
 @enduml

@@ -4,112 +4,142 @@ salt
 {T
 + Select game mode
 ++  Goal
-+++ To choose which game mode will be played
++++ To choose which game mode will be played and display
++++ the game board for that mode
 ++ Entry conditions
 +++ The user has started the app
 ++ Scenario
 +++ The opening menu is displayed
 +++ User selects a game mode
++++ User selects a difficulty
 ++ Exit conditions
 +++ Successful Exit Conditions
-++++ Game mode chosen
-++++ Move to next menu screen
-+++ Failure Exit Conditions
-++++ Unable to select game mode
-}
----
-{T
-+ Select difficulty
-++  Goal
-+++ To choose the difficulty of the game
-++ Entry conditions
-+++ The user has selected a game mode (sub-use)
-++ Scenario
-+++ The difficulty menu is displayed
-+++ User selects difficulty from menu
-+++ Game board is then displayed
-++ Exit conditions
-+++ Successful Exit Conditions
-++++ Correct size board is displayed
-+++ Failure Exit Conditions
-++++ Incorrect size board is displayed
+++++ The game board for the user's selected mode and
++++++ difficulty is displayed
 }
 ---
 {T
 + Play game
 ++  Goal
-+++ To choose cards and try to match each
++++ To turn over cards and try to match each
 ++++ of them to their single other match
 ++ Entry conditions
 +++ The user has chosen a game mode and difficulty
++++ The game board for that mode and difficulty is shown
 ++ Scenario
-+++ The game board is displayed
-+++ User chooses first card (sub-use)
-+++ User chooses second card (sub-use)
-++ Exceptions
-+++ One or more cards do not have matches
++++ One of the following:
+++++ User is playing Classic Mode (sub-use)
+++++ User is playing Timed Mode (sub-use)
+++++ User is playing Versus Mode (sub-use)
 ++ Exit conditions
 +++ Successful Exit Conditions
 ++++ All cards have been matched
-+++ Failure Exit Conditions
-++++ All cards cannot be matched
 }
 ---
 {T
-+ Choose first card
++ Play Classic
 ++  Goal
-+++ To choose the first card to be revealed
++++ To clear the board of cards in the fewest tries
 ++ Entry conditions
-+++ The user has started the game
++++ The user has started the game in Classic Mode
 ++ Scenario
 +++ The current game board is displayed with all cards face down
-+++ User chooses one card to reveal
-++ Exceptions
-+++ No cards left to choose but game doesn't end
++++ Repeat until no cards left on board:
+++++ User turns over one card
+++++ User turns over second card
+++++ If the two cards match, the two cards are removed from play
+++++ Else, the two cards are flipped back over after one second
++++ Final number of tries are displayed
++++ If score is good enough, user submits score (sub-use)
 ++ Exit conditions
 +++ Successful Exit Conditions
-++++ Card successfully chosen
-+++ Failure Exit Conditions
-++++ No cards to be chosen, nothing to be done
+++++ All cards have been matched
 }
 ---
 {T
-+ Choose second card
++ Play Timed
 ++  Goal
-+++ To choose the second card of the pair
++++ To clear the board of cards in the quickest time
 ++ Entry conditions
-+++ The user has successfully chosen the first card to reveal
++++ The user has started the game in Timed Mode
 ++ Scenario
-+++ The current game board is displayed with one card face up
-+++ User selects second card to reveal
-++ Exceptions
-+++ No cards are left to reveal
++++ The current game board is displayed with all cards face down
++++ Repeat until no cards left on board
+++++ User turns over one card
+++++ User turns over second card
+++++ If the two cards match, the two cards are removed from play
+++++ Else, the two cards are flipped back over after one second
++++ Total time is displayed
++++ If score is good enough, user submits score (sub-use)
 ++ Exit conditions
 +++ Successful Exit Conditions
-++++ Card chosen is a match and both cards are removed
-++++ Card chosen isn't a match and both cards a flipped back over
-+++ Failure Exit Conditions
-++++ There is no second card to be chosen, nothing to be done
+++++ All cards have been matched
+}
+--
+{T
++ Play Local Versus
+++  Goal
++++ This is a local 2-player game mode. The goal for each player
+++++  is to make as many matches as you can. The player with
+++++ the most matches once all cards are removed is the
+++++ winner.
+++ Entry conditions
++++ The users have started the game in Versus Mode
+++ Scenario
++++ The current game board is displayed with all cards face down
++++ It is Player 1's turn
++++ Repeat until no cards left on board
+++++ Player whose turn it currently is:
++++++ turns over one card
++++++ turns over second card
++++++ If the two cards match, the two cards are removed from play
+++++++ and it remains that player's turn.
++++++ Else, the two cards are flipped back over after one second
+++++++ and it is now the other player's turn
+++ Exit conditions
++++ Successful Exit Conditions
+++++ All cards have been matched
+++++ The winner of the game and the final number of matches are displayed
 }
 --
 {T
 + Submit score
 ++  Goal
-+++ To add the current score to the high score list
++++ To add the current score to the high scores
 ++ Entry conditions
-+++ The user has successfully completed a game
++++ The user has successfully completed a game with a score high enough
+++++ to be added to the high scores
 ++ Scenario
-+++ Scoreboard is displayed with user's score
-+++ The user enters initials to save with high score
++++ The users score is displayed along with a text box to enter initials
++++ The user enters initials
++++ The user presses the submit score button
++++ The score is saved to the high score
 ++ Exceptions
-+++ Scoreboard not retrieved properly
++++ Initials must be 3 characters and have no white space.
+++++ If the user tries to enter initials that are longer than 3 characters
+++++ or contain whitespace, they will be notified this is not allowed and
+++++ allowed to change their original entry.
 ++ Exit conditions
 +++ Successful Exit Conditions
-++++ User's current score is added to the high score list and is saved
-++++ User's current score not high enough to go on high score list
-+++++ and is returned to the main menu
-+++ Failure Exit Conditions
-++++ User's high score is not successfully saved to the high score list
+++++ User's score is saved to the high score archive
+}
+--
+{T
++ View high scores
+++  Goal
++++ To view high scores for a certain game mode
+++ Entry conditions
++++ The user has selected View High Scores from the main menu
+++ Scenario
++++ The user selects the game mode and difficulty for which
+++++ they want to see the high scores on
++++ Either:
+++++ There are no current high scores and that is displayed to the user
+++++ There are high scores saved and they are displayed to the user
+++ Exit conditions
++++ Successful Exit Conditions
+++++ The high scores for the selected mode and difficulty are displayed
+++++ There are no current high scores saved and that notice is displayed
 }
 }
 @enduml
