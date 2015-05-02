@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/versusLayout"
+    android:background="@color/backgroundColor" >
+    <!-- android:background="@drawable/splashvert"> -->
+
+
+    <TableRow
+        android:id="@+id/versusRowMatches"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pOneMatches"
+            android:paddingLeft="10sp"
+            android:layout_weight="1"
+            android:paddingRight="10sp"
+            android:password="false">
+        </TextView>
+
+        <TextView android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pTwoMatches"
+            android:paddingLeft="10sp"
+            android:layout_weight="1"
+            android:paddingRight="10sp"
+            android:password="false">
+        </TextView>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/versusSeparator"
+        android:layout_width="match_parent"
+        android:gravity="center">
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/separator"
+            android:paddingLeft="10sp"
+            android:layout_weight="1"
+            android:paddingRight="10sp"
+            android:password="false">
+        </TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/versusRow02"
+        android:layout_width="wrap_content" android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center">
+        </LinearLayout>
+
+        <ImageView android:id="@+id/ImageView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible">
+
+        </ImageView>
+    </TableRow>
+</TableLayout>
