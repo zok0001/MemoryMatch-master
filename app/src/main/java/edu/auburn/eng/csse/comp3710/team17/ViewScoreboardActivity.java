@@ -66,7 +66,7 @@ public class ViewScoreboardActivity extends FragmentActivity {
                 }
                 if (!empty) {
                     if (mode == 1) scoreboard = "NAME\t\tTRIES\n";
-                    else scoreboard = "NAME\t\tTIME\n";
+                    else scoreboard = "NAME\t\tTIME (S)\n";
 
                     for (int i = 0; i < numTopScores; i++) {
                         TopScore curScore = topScores.get(i);
