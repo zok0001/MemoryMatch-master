@@ -831,7 +831,10 @@ public class MemoryGame extends FragmentActivity {
                     //important, creates a card using this newly created button and passed index to be used as id
                     Card card1 = new Card(button, cardIDs[index],
                             getResources().getDrawable(cardIDs[index]));
-                    if (cardOnBoard[index]) card1.setMatch();
+                    if (cardOnBoard[index]) {
+                        card1.setMatch();
+                        card1.faceDown();
+                    }
                     if (cardFaceUp[index]) {
                         card1.setFaceUp();
                         selection1 = card1;
