@@ -22,7 +22,7 @@ public class Card {
 
     // These two fields are used when restoring instance state to see if the card was face up/down
     // when restored or if the card had already been matched.
-    private boolean faceDown;
+    private boolean faceUp;
 
 
     //creating a card takes parameters of the card's button, its image, and the drawableId which will be the card's Id as well.
@@ -34,6 +34,7 @@ public class Card {
         back = backImage;
         this.button = button;
         this.button.setVisibility(View.VISIBLE);
+        this.faceUp = false;
 
         this.faceDown();
 
@@ -94,5 +95,13 @@ public class Card {
     public void setMatch() {
         this.match = true;
     }
+
+    public void setFaceUp() {this.faceUp = true;}
+
+    public void setFaceDown() {this.faceUp = false;}
+
+    public boolean isFaceUp() {return faceUp;}
+
+    public boolean getMatch() {return this.match;}
 
 }

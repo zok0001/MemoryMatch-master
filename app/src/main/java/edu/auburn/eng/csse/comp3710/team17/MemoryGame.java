@@ -100,6 +100,12 @@ public class MemoryGame extends FragmentActivity {
     static final String STATE_SCORE = "score";
     static final String STATE_DIFFICULTY_CHOSEN = "chosen";
 
+    static final String STATE_CARDS = "cards";
+    static final String STATE_ON_BOARD = "onBoard";
+    static final String STATE_FACE_UP = "faceUp";
+    static final String STATE_ROW = "row";
+    static final String STATE_COLUMN = "column";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -396,6 +402,8 @@ public class MemoryGame extends FragmentActivity {
                 //no match, turn cards back over, set selections to null
                 selection1.faceDown();
                 selection2.faceDown();
+                selection1.setFaceDown();
+                selection2.setFaceDown();
             }
             selection1 = null;
             selection2 = null;
@@ -589,6 +597,7 @@ public class MemoryGame extends FragmentActivity {
             if(selection1 == null) {
                 selection1 = cardList.get(id);
                 selection1.turnOver();
+                selection1.setFaceUp();
                 
                 /* eliminated for more logical method of determing attempts
                 tries++;
@@ -599,6 +608,7 @@ public class MemoryGame extends FragmentActivity {
                 selection2 = cardList.get(id);
                 tries++;
                 selection2.turnOver();
+                selection2.setFaceUp();
 
                 if (mode == 1) {
 
@@ -753,14 +763,99 @@ public class MemoryGame extends FragmentActivity {
      */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putBoolean(STATE_DIFFICULTY_CHOSEN, difficultyChosen);
-        savedInstanceState.putInt(STATE_MODE, mode);
-        if (mode == 1)
-            savedInstanceState.putInt(STATE_SCORE, tries);
-        else
-            savedInstanceState.putInt(STATE_SCORE, finalTime);
+        if (difficultyChosen) {
+            int totalCards = ROW * COL;
+            int[] cardIDs = new int[totalCards];
+            boolean[] cardOnBoard = new boolean[totalCards];
+            boolean[] cardFaceUp = new boolean[totalCards];
+
+            for (Card c : cardList) {
+                int index = c.getButton().getId();
+                boolean matched = c.getMatch();
+                boolean faceUp = c.isFaceUp();
+                cardIDs[index] = c.getId();
+                cardOnBoard[index] = matched;
+                cardFaceUp[index] = faceUp;
+            }
+            savedInstanceState.putIntArray(STATE_CARDS, cardIDs);
+            savedInstanceState.putBooleanArray(STATE_ON_BOARD, cardOnBoard);
+            savedInstanceState.putBooleanArray(STATE_FACE_UP, cardFaceUp);
+            savedInstanceState.putInt(STATE_ROW, ROW);
+            savedInstanceState.putInt(STATE_COLUMN, COL);
+
+            savedInstanceState.putBoolean(STATE_DIFFICULTY_CHOSEN, difficultyChosen);
+            savedInstanceState.putInt(STATE_MODE, mode);
+            if (mode == 1)
+                savedInstanceState.putInt(STATE_SCORE, tries);
+            else
+                savedInstanceState.putInt(STATE_SCORE, totalTime);
+
+        }
 
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState.getBoolean(STATE_DIFFICULTY_CHOSEN)) {
+            difficultyChosen = true;
+            gameBoard.removeView(findViewById(R.id.TableRow01));
+            mode = savedInstanceState.getInt(STATE_MODE);
+            ROW = savedInstanceState.getInt(STATE_ROW);
+            COL = savedInstanceState.getInt(STATE_COLUMN);
+            int[] cardIDs = savedInstanceState.getIntArray(STATE_CARDS);
+            boolean[] cardOnBoard = savedInstanceState.getBooleanArray(STATE_ON_BOARD);
+            boolean[] cardFaceUp = savedInstanceState.getBooleanArray(STATE_FACE_UP);
+
+            gameBoard = (TableLayout)findViewById(R.id.TableLayout01);
+            context = gameBoard.getContext();
+            gameBoard.removeView(findViewById(R.id.TableRow01));
+            TableRow newRow = ((TableRow)findViewById(R.id.TableRow02));
+            newRow.removeAllViews();
+            gameBoard = new TableLayout(context);
+            newRow.addView(gameBoard);
+            selection1 = null;
+            selection2 = null;
+
+            for (int rows = 0; rows < ROW; rows++) {
+                TableRow row = new TableRow(context);
+                row.setHorizontalGravity(Gravity.CENTER);
+                for (int cols = 0; cols < COL; cols++) {
+                    int index = (rows * COL) + cols;
+                    ImageButton button = new ImageButton(context);
+                    button.setId(index);
+                    button.setOnClickListener(buttonListener);
+                    //adding to buttonlist possibly not needed?
+                    buttonList.add(button);
+                    row.addView(button);
+                    //important, creates a card using this newly created button and passed index to be used as id
+                    Card card1 = new Card(button, cardIDs[index],
+                            getResources().getDrawable(cardIDs[index]));
+                    if (cardOnBoard[index]) card1.setMatch();
+                    if (cardFaceUp[index]) {
+                        card1.setFaceUp();
+                        selection1 = card1;
+                        selection1.turnOver();
+                    } else {
+                        card1.faceDown();
+                    }
+                    cardList.add(card1);
+                }
+                gameBoard.addView(row);
+            }
+
+            //initialize attempts
+            if (mode == 2) {
+                totalTime = savedInstanceState.getInt(STATE_SCORE);
+                startTimer();
+            } else {
+                //counter of total tries
+                tries = savedInstanceState.getInt(STATE_SCORE);
+                ((TextView) findViewById(R.id.textTries)).setText("Total Turns: " + tries);
+            }
+
+        }
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
 }
