@@ -16,6 +16,8 @@
     <string name="scoreboardActivity">ViewScoreboardActivity</string>
     <color name="backgroundColor">#496e9c</color>
     <string name="versusMode">VersusMode</string>
+    <string name="htp">How To Play</string>
+    <color name="orange">#ffa500</color>
 
     <string-array name="difficulty">
         <item>Select your difficulty here</item>
@@ -33,4 +35,15 @@
         <item>Timed Normal</item>
         <item>Timed Hard</item>
     </string-array>
+
+    <string name="howToPlay"><b>How to play Auburn Match</b>\n\nAuburn Match is an Auburn twist on the
+        classic game Memory. The basic game is played with cards all face down on the board. There
+        are two of each card on the board, and the goal is to match each card with its partner.
+        Choose two cards at a time, if they match they will be removed from play. If not, they will
+        be turned back over.\n\n<b>Classic Mode:</b> Match all of the cards in the fewest moves possible.\n\n
+        <b>Timed Mode:</b> Match all of the cards in the quickest time.\n\n<b>Versus Mode:</b> This is a local
+        two player game mode. Take turns with a friend playing the game, and whoever has the most
+        matches when all the cards are matched wins!\n\nSo get going and match all things Auburn from
+        Aubie to Bo to Jordan-Hare and more!
+    </string>
 </resources>

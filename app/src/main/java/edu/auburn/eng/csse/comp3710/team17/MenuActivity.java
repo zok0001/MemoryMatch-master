@@ -8,20 +8,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-public class MenuActivity extends FragmentActivity {
-    private int mode;
-    private int difficulty;
-    private int score;
-    private boolean gameOver;
-    private Button viewScoresButton;
+public class MenuActivity extends FragmentActivity
+        implements HowToPlayFragment.OnMenuButtonClickedListener {
+    private ImageView image;
+    private LinearLayout buttonLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        /** final FragmentActivity thisActivity = this; */
-        viewScoresButton = (Button) findViewById(R.id.scoreboardButton);
 
     }
 
@@ -47,9 +46,34 @@ public class MenuActivity extends FragmentActivity {
         startActivity(intent);
     }
 
+    public void showHowToPlay(View view) {
+        buttonLayout = (LinearLayout) findViewById(R.id.buttonsLayout);
+        image = (ImageView) findViewById(R.id.imageView);
+        buttonLayout.setVisibility(View.INVISIBLE);
+        image.setVisibility(View.INVISIBLE);
+        HowToPlayFragment htpFrag = HowToPlayFragment.newInstance();
+        htpFrag.setArguments(getIntent().getExtras());
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.menuActivity, htpFrag, "HOW TO PLAY");
+        transaction.commit();
+    }
+
+    public void makeMenuVisible() {
+        buttonLayout = (LinearLayout) findViewById(R.id.buttonsLayout);
+        image = (ImageView) findViewById(R.id.imageView);
+        buttonLayout.setVisibility(View.VISIBLE);
+        image.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onMenuPressed() {
+        makeMenuVisible();
     }
 
 }

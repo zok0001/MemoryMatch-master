@@ -4,6 +4,10 @@ partition Activity1 {
 }
 partition Activity2 {
 Splash --> MainMenu
+partition Fragment {
+MainMenu --> HowToPlay
+HowToPlay --> MainMenu
+}
 }
 partition Activity3 {
 MainMenu --> MemoryGame
