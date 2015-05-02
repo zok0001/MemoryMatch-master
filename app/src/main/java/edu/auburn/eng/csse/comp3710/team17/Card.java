@@ -20,6 +20,10 @@ public class Card {
     //back image received when creating card
     private Drawable back;
 
+    // These two fields are used when restoring instance state to see if the card was face up/down
+    // when restored or if the card had already been matched.
+    private boolean faceDown;
+
 
     //creating a card takes parameters of the card's button, its image, and the drawableId which will be the card's Id as well.
     public Card(ImageButton button, int drawId, Drawable backImage) {

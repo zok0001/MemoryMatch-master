@@ -95,9 +95,10 @@ public class MemoryGame extends FragmentActivity {
     private TextView winningText;
     private Button submitButton;
     private EditText editInitials;
-
-
-
+    private boolean difficultyChosen;
+    static final String STATE_MODE = "mode";
+    static final String STATE_SCORE = "score";
+    static final String STATE_DIFFICULTY_CHOSEN = "chosen";
 
 
     @Override
@@ -105,6 +106,7 @@ public class MemoryGame extends FragmentActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory_game);
+        difficultyChosen = false;
 
         //to be used to distinguish what game mode is selected
         mode = getIntent().getIntExtra("mode", 0);
@@ -169,6 +171,8 @@ public class MemoryGame extends FragmentActivity {
                 loadPictures(position);
                 initialize( x, y, mode);
                 gameOver = false;
+                difficultyChosen = true;
+
               }
 
             @Override
@@ -736,6 +740,28 @@ public class MemoryGame extends FragmentActivity {
         }
 
     };
+
+    /**
+     * We need to save all information needed to restore a game back to its previous state here.
+     * List of things that need to be saved:
+     * - Mode *Easy*
+     * - Current score (TRIES OR TIME BASED ON MODE) *Easy*
+     * - The cards in the order they appear on the board, if the cards are still on the board,
+     * and if there was one card face up on the board already... This is the challenging one.
+     * - Has difficulty been selected yet? If not, then we don't restore anything.
+     * @param savedInstanceState
+     */
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean(STATE_DIFFICULTY_CHOSEN, difficultyChosen);
+        savedInstanceState.putInt(STATE_MODE, mode);
+        if (mode == 1)
+            savedInstanceState.putInt(STATE_SCORE, tries);
+        else
+            savedInstanceState.putInt(STATE_SCORE, finalTime);
+
+        super.onSaveInstanceState(savedInstanceState);
+    }
 
 }
 
