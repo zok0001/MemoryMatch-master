@@ -44,6 +44,7 @@ import android.content.Intent;
 
 
 public class MemoryGame extends FragmentActivity {
+    boolean running = false;
     //static variables of row and comment length
     private static int ROW = -1;
     private static int COL = -1;
@@ -67,10 +68,17 @@ public class MemoryGame extends FragmentActivity {
     private Card selection1;
     private Card selection2;
 
+
+    private Timer gameTimer;
+    private TimerTask timerTask;
+
     //game type
     private int mode;
     //attempted tries
     private int tries;
+    //elapsed time
+    private int totalTime;
+    private int finalTime;
     //# of matched cards
     private int totalMatches;
     long seed = System.nanoTime();
@@ -87,6 +95,7 @@ public class MemoryGame extends FragmentActivity {
     private TextView winningText;
     private Button submitButton;
     private EditText editInitials;
+
 
 
 
@@ -116,6 +125,8 @@ public class MemoryGame extends FragmentActivity {
         gameBoard = (TableLayout)findViewById(R.id.TableLayout01);
 
         context = gameBoard.getContext();
+
+        //gameTimer = new GameTimer();
 
         winningText = (TextView) findViewById(R.id.winningText);
         submitButton = (Button)findViewById(R.id.submitButton);
@@ -294,6 +305,7 @@ public class MemoryGame extends FragmentActivity {
 
             }
         });
+
     }
     /**
      * handler maintains game and whether card's have been correctly matched
@@ -321,7 +333,12 @@ public class MemoryGame extends FragmentActivity {
                 
                 //check to see if game completed
                 if (totalMatches == ((ROW*COL)/2)) {
-                    finalScore = tries;
+                    if (mode == 2) {
+                        finalScore = finalTime;
+                        stopTimer();
+                    } else {
+                        finalScore = tries;
+                    }
                     gameOver = true;
                     // TODO: END OF GAME SEQUENCE
                     // CHECK TO SEE IF THE FINAL SCORE OF THE CURRENT PLAY IS GOOD ENOUGH TO BE
@@ -480,24 +497,34 @@ public class MemoryGame extends FragmentActivity {
         //List of created cards
         cardList.clear();
         
-        //no card has been selectd
+        //no card has been selected
         selection1 = null;
         
         //shuffle arraylist of images
         Collections.shuffle(cardBacks, new Random(seed));
 
-        //add view of new row to tablelayout based on number of rows
+        //add view of new row to tableLayout based on number of rows
         for (int i =0; i < ROW; i++) {
             gameBoard.addView(addRow(i));
         }
 
         selection1 = null;
 
-        //intialize attempts
+        //initialize attempts
         tries = 0;
-        //counter of total tries
-        ((TextView)findViewById(R.id.textTries)).setText("Total Turns: "+ tries);
+        totalTime = 0;
+        finalTime = 0;
+        if (mode == 2) {
+          startTimer();
+        } else {
+            //counter of total tries
+            ((TextView) findViewById(R.id.textTries)).setText("Total Turns: " + tries);
+        }
     }
+
+
+
+
     /**
      * adds a row
      * returns TableRow
@@ -541,14 +568,15 @@ public class MemoryGame extends FragmentActivity {
         public void onClick(View v) {
 
             synchronized(locked) {
+
                 if(selection1!=null && selection2!=null){
+
                     return;
+
                 }
+
                 int id = v.getId();
                 turnFaceUp((ImageButton) v, id);
-
-
-
             }
         }
 
@@ -568,7 +596,13 @@ public class MemoryGame extends FragmentActivity {
                 tries++;
                 selection2.turnOver();
 
-                ((TextView)findViewById(R.id.textTries)).setText("Total Turns: "+ tries);
+                if (mode == 1) {
+
+                    //counter of total tries
+                    ((TextView) findViewById(R.id.textTries)).setText("Total Turns: " + tries);
+                }
+
+
                 TimerTask task = new TimerTask() {
                 
                 //ensures user has ample time to see both card images before game determines whether they match
@@ -668,4 +702,40 @@ public class MemoryGame extends FragmentActivity {
         return false;
     }
 
+
+
+    public void startTimer(){
+        gameTimer = new Timer();
+        timerTask = new myTimerTask();
+        gameTimer.schedule(timerTask, 0, 1000);
+    }
+    public void stopTimer() {
+        gameTimer.cancel();
+        totalTime = 0;
+
+    }
+
+    private class myTimerTask extends TimerTask{
+        @Override
+        public void run() {
+
+            totalTime++;
+            updateTimer.sendEmptyMessage(0);
+        }
+    }
+
+    private Handler updateTimer = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+
+            //super.handleMessage(msg);
+
+            int seconds = totalTime % 60;
+            ((TextView) findViewById(R.id.textTries)).setText(String.format("Total Time Elapsed: %02d", seconds));
+            finalTime = seconds;
+        }
+
+    };
+
 }
+
