@@ -52,6 +52,7 @@ public class Card {
             this.button.setBackgroundResource(R.drawable.auback);
             this.button.setVisibility(View.INVISIBLE);
         }
+        this.button.setEnabled(true);
     }
     /**
      * determines if two cards are identical
@@ -67,11 +68,12 @@ public class Card {
      * */
     public void turnOver() {
         
-        if (android.os.Build.VERSION.SDK_INT >= 16)
+        if (android.os.Build.VERSION.SDK_INT >= 16) {
             this.button.setBackground(back);
-        else
+         }else {
             this.button.setBackgroundDrawable(back);
-
+         }
+        this.button.setEnabled(false);
     }
 
     /**
