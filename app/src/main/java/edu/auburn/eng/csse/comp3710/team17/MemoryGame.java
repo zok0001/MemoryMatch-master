@@ -154,7 +154,7 @@ public class MemoryGame extends FragmentActivity {
                         break;
                     case 3:
                         x= 4;
-                        y= 5;
+                        y= 6;
                         curDifficulty = 2;
                         break;
                     default:
@@ -361,6 +361,8 @@ public class MemoryGame extends FragmentActivity {
                 cardBacks.add(R.drawable.cam);
                 cardBacks.add(R.drawable.logo);
                 cardBacks.add(R.drawable.charles);
+                cardBacks.add(R.drawable.toomers);
+                cardBacks.add(R.drawable.aulogo);
 
                 cardBacks.add(R.drawable.gus);
                 cardBacks.add(R.drawable.nova);
@@ -372,6 +374,8 @@ public class MemoryGame extends FragmentActivity {
                 cardBacks.add(R.drawable.cam);
                 cardBacks.add(R.drawable.logo);
                 cardBacks.add(R.drawable.charles);
+                cardBacks.add(R.drawable.toomers);
+                cardBacks.add(R.drawable.aulogo);
 
                 break;
             default:
