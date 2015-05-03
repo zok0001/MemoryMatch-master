@@ -733,6 +733,7 @@ public class MemoryGame extends FragmentActivity {
             int[] cardIDs = new int[totalCards];
             boolean[] cardOnBoard = new boolean[totalCards];
             boolean[] cardFaceUp = new boolean[totalCards];
+            int tm = totalMatches;
 
             for (Card c : cardList) {
                 int index = c.getButton().getId();
@@ -747,7 +748,7 @@ public class MemoryGame extends FragmentActivity {
             savedInstanceState.putBooleanArray(STATE_FACE_UP, cardFaceUp);
             savedInstanceState.putInt(STATE_ROW, ROW);
             savedInstanceState.putInt(STATE_COLUMN, COL);
-
+            savedInstanceState.putInt(STATE_MATCHES, tm);
             savedInstanceState.putBoolean(STATE_DIFFICULTY_CHOSEN, difficultyChosen);
             savedInstanceState.putInt(STATE_MODE, mode);
             if (mode == 1)
@@ -771,6 +772,7 @@ public class MemoryGame extends FragmentActivity {
             int[] cardIDs = savedInstanceState.getIntArray(STATE_CARDS);
             boolean[] cardOnBoard = savedInstanceState.getBooleanArray(STATE_ON_BOARD);
             boolean[] cardFaceUp = savedInstanceState.getBooleanArray(STATE_FACE_UP);
+            totalMatches = savedInstanceState.getInt(STATE_MATCHES);
 
             gameBoard = (TableLayout)findViewById(R.id.TableLayout01);
             context = gameBoard.getContext();
