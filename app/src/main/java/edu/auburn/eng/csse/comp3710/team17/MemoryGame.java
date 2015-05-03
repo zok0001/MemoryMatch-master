@@ -1,6 +1,5 @@
 package edu.auburn.eng.csse.comp3710.team17;
 
-
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
@@ -61,7 +60,7 @@ public class MemoryGame extends FragmentActivity {
     private Card selection1;
     private Card selection2;
 
-
+    //game running time objects
     private Timer gameTimer;
     private TimerTask timerTask;
 
@@ -89,6 +88,7 @@ public class MemoryGame extends FragmentActivity {
     private Button submitButton;
     private EditText editInitials;
     private boolean difficultyChosen;
+    //string identifiers for saving instance state
     static final String STATE_MODE = "mode";
     static final String STATE_SCORE = "score";
     static final String STATE_DIFFICULTY_CHOSEN = "chosen";
@@ -109,14 +109,9 @@ public class MemoryGame extends FragmentActivity {
 
         //to be used to distinguish what game mode is selected
         mode = getIntent().getIntExtra("mode", 0);
-        //mode = getIntent().getStringExtra("mode", 0);     alternative method of passing intent
         
         //handler which updates card status and checks for match
         handler = new UpdateHandler();
-
-        //setContentView(R.layout.activity_memory_game);
-        
-        // setcontentview again?
         
         backPic = getResources().getDrawable(R.drawable.auback);
 
@@ -127,15 +122,12 @@ public class MemoryGame extends FragmentActivity {
 
         context = gameBoard.getContext();
 
-        //gameTimer = new GameTimer();
-
         winningText = (TextView) findViewById(R.id.winningText);
         submitButton = (Button)findViewById(R.id.submitButton);
         editInitials = (EditText)findViewById(R.id.editInitials);
         winningText.setVisibility(View.INVISIBLE);
         submitButton.setVisibility(View.INVISIBLE);
         editInitials.setVisibility(View.INVISIBLE);
-
 
         //Spinner selection for difficulty determines what size game board
         Spinner spinner = (Spinner) findViewById(R.id.sizeSpinner);
@@ -310,72 +302,10 @@ public class MemoryGame extends FragmentActivity {
         });
 
     }
-    /**
-     * handler maintains game and whether card's have been correctly matched
-     * 
-     * */
-    class UpdateHandler extends Handler {
-
-        @Override
-        public void handleMessage(Message message) {
-            synchronized (locked) {
-                checkMatch();
-            }
-        }
-        public void checkMatch () {
-            if(selection1.equals(selection2)) {
-                
-                //set both cards as being matched
-                selection1.setMatch();
-                selection2.setMatch();
-                
-                //call card method to turn face down which will make invisible when matched
-                selection1.faceDown();
-                selection2.faceDown();
-                totalMatches++;
-                
-                //check to see if game completed
-                if (totalMatches == ((ROW*COL)/2)) {
-                    if (mode == 2) {
-                        finalScore = finalTime;
-                        stopTimer();
-                    } else {
-                        finalScore = tries;
-                    }
-                    gameOver = true;
-
-                    Toast.makeText(context, "Congratulations! You win!", Toast.LENGTH_SHORT).show();
-
-                    String modeString = (mode == 1) ? "Classic" : "Timed";
-                    String difficultyString;
-                    if (curDifficulty == 0) difficultyString = "Easy";
-                    else if (curDifficulty == 1) difficultyString = "Normal";
-                    else difficultyString = "Hard";
-                    String scoreType = (mode == 1) ? "moves" : "seconds";
-                    String youWin = "Congratulations! You beat " + modeString + "\nmode on difficulty "
-                            + difficultyString + " in " + finalScore + " " + scoreType;
-                    youWin += "\nEnter your initials to submit your score! (3 Characters)";
-                    winningText.setText(youWin);
-                    submitButton.setText("SUBMIT");
-                    winningText.setVisibility(View.VISIBLE);
-                    submitButton.setVisibility(View.VISIBLE);
-                    editInitials.setVisibility(View.VISIBLE);
-                }
-            }
-            else {
-                //no match, turn cards back over, set selections to null
-                selection1.faceDown();
-                selection2.faceDown();
-                selection1.setFaceDown();
-                selection2.setFaceDown();
-            }
-            selection1 = null;
-            selection2 = null;
-        }
-
-
-
-    }
+    
+    
+   
+    
     /**
      * initialize settings based on spinner selection
      * 
@@ -490,6 +420,7 @@ public class MemoryGame extends FragmentActivity {
         tries = 0;
         totalTime = 0;
         finalTime = 0;
+        //check if timed or classic mode
         if (mode == 2) {
           startTimer();
         } else {
@@ -532,6 +463,73 @@ public class MemoryGame extends FragmentActivity {
         Card card1 = new Card(button, drawId, getResources().getDrawable(drawId));
         // the index of this card in the cardlist will correspond to the id assigned to its button.
         cardList.add(card1);
+    }
+    
+     /**
+     * handler maintains game and whether card's have been correctly matched
+     * 
+     * */
+    class UpdateHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message message) {
+            synchronized (locked) {
+                checkMatch();
+            }
+        }
+        public void checkMatch () {
+            if(selection1.equals(selection2)) {
+                
+                //set both cards as being matched
+                selection1.setMatch();
+                selection2.setMatch();
+                
+                //call card method to turn face down which will make invisible when matched
+                selection1.faceDown();
+                selection2.faceDown();
+                totalMatches++;
+                
+                //check to see if game completed
+                if (totalMatches == ((ROW*COL)/2)) {
+                    if (mode == 2) {
+                        finalScore = finalTime;
+                        stopTimer();
+                    } else {
+                        finalScore = tries;
+                    }
+                    gameOver = true;
+
+                    Toast.makeText(context, "Congratulations! You win!", Toast.LENGTH_SHORT).show();
+
+                    String modeString = (mode == 1) ? "Classic" : "Timed";
+                    String difficultyString;
+                    if (curDifficulty == 0) difficultyString = "Easy";
+                    else if (curDifficulty == 1) difficultyString = "Normal";
+                    else difficultyString = "Hard";
+                    String scoreType = (mode == 1) ? "moves" : "seconds";
+                    String youWin = "Congratulations! You beat " + modeString + "\nmode on difficulty "
+                            + difficultyString + " in " + finalScore + " " + scoreType;
+                    youWin += "\nEnter your initials to submit your score! (3 Characters)";
+                    winningText.setText(youWin);
+                    submitButton.setText("SUBMIT");
+                    winningText.setVisibility(View.VISIBLE);
+                    submitButton.setVisibility(View.VISIBLE);
+                    editInitials.setVisibility(View.VISIBLE);
+                }
+            }
+            else {
+                //no match, turn cards back over, set selections to null
+                selection1.faceDown();
+                selection2.faceDown();
+                selection1.setFaceDown();
+                selection2.setFaceDown();
+            }
+            selection1 = null;
+            selection2 = null;
+        }
+
+
+
     }
     
     /**
@@ -605,6 +603,7 @@ public class MemoryGame extends FragmentActivity {
 
     }
 
+    //Determines if score is low enough to be added to top scores
     public boolean canAddScore() {
         int numTopScores = 0;
         ArrayList<TopScore> topScores = new ArrayList<>();
@@ -682,6 +681,10 @@ public class MemoryGame extends FragmentActivity {
 
 
 
+    /**
+     * Start Game Timer, creates new android timer and timer task, to update each second
+     * 
+     * */
     public void startTimer(){
         gameTimer = new Timer();
         timerTask = new myTimerTask();
@@ -692,7 +695,6 @@ public class MemoryGame extends FragmentActivity {
         totalTime = 0;
 
     }
-
     private class myTimerTask extends TimerTask{
         @Override
         public void run() {
@@ -701,7 +703,6 @@ public class MemoryGame extends FragmentActivity {
             updateTimer.sendEmptyMessage(0);
         }
     }
-
     private Handler updateTimer = new Handler(){
         @Override
         public void handleMessage(Message msg) {
