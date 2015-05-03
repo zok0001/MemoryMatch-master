@@ -711,8 +711,9 @@ public class MemoryGame extends FragmentActivity {
             //super.handleMessage(msg);
 
             int seconds = totalTime % 60;
-            ((TextView) findViewById(R.id.textTries)).setText(String.format("Total Time Elapsed: %02d", seconds));
-            finalTime = seconds;
+            int minutes = (totalTime / 60) % 60;
+            ((TextView) findViewById(R.id.textTries)).setText(String.format("Total Time Elapsed: %02d : %02d", minutes, seconds));
+            finalTime = (minutes * 60) + seconds;
         }
 
     };
