@@ -1,0 +1,29 @@
+Release Notes
+App Name: AuburnMatch
+Date: April 24, 2015
+Version: 0.2
+
+-What's New
+This version of AuburnMatch now keeps track of high scores. After completing a game, you
+can now submit your score to be saved locally on the phone. Game play in classic mode is now
+more clean. Card randomization is now done as opposed to placing the cards in a predetermined order
+every time a game is started.
+-Features and changes
+    -Splash Screen (0.1)
+    -Main Menu (0.1)
+    -Classic game mode with three different board sizes Easy, Normal, and Hard (0.1)
+    -High Score tracking capability (NEW)
+    -Card randomization on game board (NEW)
+-Features left to add:
+    -Timed Mode
+    -Local Two Player Versus Mode
+    -How to Play option at the main menu
+-Installation guide
+    -Install AuburnMatch.apk
+-Known Issues
+    -The Double Click bug still remains (refer to the Beta Version's release notes:
+        ReleaseNotes0-1.txt
+    -Must manually add the high score files to the phone using the adb. Need to add code that
+        generates a high score file if the files doesn't currently exist on the phone
+    -App currently loses state when screen orientation changes
+

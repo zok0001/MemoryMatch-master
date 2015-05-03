@@ -1,0 +1,31 @@
+Release Notes
+App Name: AuburnMatch
+Date: May 2, 2015
+Version: 1.1
+
+-What's New
+The app now handles orientation changes during game play and while looking at the high scores list.
+When playing game modes that may go off screen, the board becomes scrollable in landscape mode
+so that all cards are visible. Visual features (colors, images, layouts, etc) have been modified to
+improve the user experience.
+-Features and changes
+    -Splash Screen (0.1)
+    -Main Menu (0.1)
+    -Classic game mode with three different board sizes Easy, Normal, and Hard (0.1)
+    -High Score tracking capability has now been fine tuned (0.2)
+    -Card randomization on game board(0.2)
+    -Local two player versus mode(0.3)
+    -Timed mode (1.0)
+    -How to Play screen has been added to introduce new users to AuburnMatch (1.0)
+    -Double Click bug resolved!!! (1.0)
+    -App now supports orientation changes during game play without loss of state.
+-Features left to add:
+    -Major features have all been accounted for. Some minor issues remain, but the app functionality
+    is now complete. Future releases will now focus on patching bugs and improving user experience.
+-Installation guide
+    -Install AuburnMatch.apk
+-Known Issues
+    -We have solved all KNOWN issues at this point. Future releases will be the result of testing to
+    find remaining issues and resolving them as they come up. If you come across any bugs while
+    playing AuburnMatch, please let us know and we will work to have them resolved as soon as
+    possible!

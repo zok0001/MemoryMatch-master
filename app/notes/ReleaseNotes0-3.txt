@@ -1,0 +1,26 @@
+Release Notes
+App Name: AuburnMatch
+Date: April 28, 2015
+Version: 0.3
+
+-What's New
+Local two player versus mode has been added. Now you and a friend can play a game of AuburnMatch
+locally and see who wins. High score tracking has been fixed where when submitting the first high
+score in a particular mode will generate the high score file on its own and not throw an error.
+-Features and changes
+    -Splash Screen (0.1)
+    -Main Menu (0.1)
+    -Classic game mode with three different board sizes Easy, Normal, and Hard (0.1)
+    -High Score tracking capability has now been fine tuned (0.2)
+    -Card randomization on game board (0.2)
+    -Local two player versus mode (NEW)
+-Features left to add:
+    -Timed Mode
+    -How to Play option at the main menu
+-Installation guide
+    -Install AuburnMatch.apk
+-Known Issues
+    -The Double Click bug still remains (refer to the Beta Version's release notes:
+        ReleaseNotes0-1.txt
+    -App currently loses state when screen orientation changes
+

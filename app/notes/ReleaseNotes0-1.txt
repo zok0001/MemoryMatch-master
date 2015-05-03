@@ -1,0 +1,29 @@
+Release Notes
+App Name: AuburnMatch
+Date: April 21, 2015
+Version: 0.1 (BETA)
+
+-What's New
+The beta version of AuburnMatch is a bare-bones version of the classic card matching game Memory.
+It consists of only one game mode where the user tries to match each card on the board with its
+identical counterpart on the board. The images are Auburn themed: Bo Jackson, Samford Hall, Aubie,
+etc.
+
+-Features and changes
+    -Splash Screen
+    -Main Menu
+    -Classic game mode with three different board sizes Easy, Normal, and Hard
+-Features left to add:
+    -Timed Mode
+    -Local Two Player Versus Mode
+    -High score keeping functionality
+    -How to Play option at the main menu
+    -Card randomization on board (Currently placed in same predetermined order each time)
+-Installation guide
+    -Install AuburnMatch.apk
+-Known Issues
+    -Double clicking a single card counts as a match and removes the single card from the board
+        -Dubbed the "Double Click" bug
+    -App currently loses state when screen orientation changes
+
+

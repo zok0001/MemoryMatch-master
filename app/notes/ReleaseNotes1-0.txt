@@ -1,0 +1,29 @@
+Release Notes
+App Name: AuburnMatch
+Date: April 30, 2015
+Version: 1.0
+
+-What's New
+All major features have now been added to AuburnMatch! Enjoy three different game modes: Classic and
+Timed modes with three different difficulties and a local twp player versus mode to play with friends!
+Save your high score and try to beat your all time bests. And finally, the infamous Double Click bug
+from the beta release has been resolved!
+-Features and changes
+    -Splash Screen (0.1)
+    -Main Menu (0.1)
+    -Classic game mode with three different board sizes Easy, Normal, and Hard (0.1)
+    -High Score tracking capability has now been fine tuned (0.2)
+    -Card randomization on game board(0.2)
+    -Local two player versus mode(0.3)
+    -Timed mode (NEW)
+    -How to Play screen has been added to introduce new users to AuburnMatch (NEW)
+    -Double Click bug resolved!!! (NEW)
+-Features left to add:
+    -Major features have all been accounted for. Some minor issues remain, but the app functionality
+    is now complete. Future releases will now focus on patching bugs and improving user experience.
+-Installation guide
+    -Install AuburnMatch.apk
+-Known Issues
+    -App currently loses state when screen orientation changes. For this reason, all parts of
+     AuburnMatch are currently locked to portait mode.
+
