@@ -63,6 +63,7 @@ public class VersusMode extends FragmentActivity {
     TextView pTwoMatchView;
 
     static final String STATE_CARDS = "cards";
+    static final String STATE_MATCHES = "matches";
     static final String STATE_ON_BOARD = "onBoard";
     static final String STATE_FACE_UP = "faceUp";
     static final String STATE_ROW = "row";
