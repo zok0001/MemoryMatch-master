@@ -64,7 +64,7 @@ class HighScoreArchive <<F,orchid) >> {
 class HowToPlay {
 }
 
-MemoryGame "1" *-- "12,16,20" Card : contains >
+MemoryGame "1" *-- "12,16,24" Card : contains >
 MemoryGame "1" *-- "1" UpdateHandler: contains >
 User -- MemoryGame: plays >
 User -- SplashScreen: views >
