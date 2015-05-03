@@ -337,6 +337,7 @@ public class VersusMode extends FragmentActivity {
         int[] cardIDs = new int[totalCards];
         boolean[] cardOnBoard = new boolean[totalCards];
         boolean[] cardFaceUp = new boolean[totalCards];
+        int tm = totalMatches;
 
         for (Card c : cardList) {
             int index = c.getButton().getId();
@@ -354,6 +355,7 @@ public class VersusMode extends FragmentActivity {
         savedInstanceState.putInt(STATE_P1_SCORE, pOneMatches);
         savedInstanceState.putInt(STATE_P2_SCORE, pTwoMatches);
         savedInstanceState.putBoolean(STATE_WHOSE_TURN_IS_IT_ANYWAY, p1Turn);
+        savedInstanceState.putInt(STATE_MATCHES, tm);
 
 
         super.onSaveInstanceState(savedInstanceState);
@@ -368,6 +370,7 @@ public class VersusMode extends FragmentActivity {
         int[] cardIDs = savedInstanceState.getIntArray(STATE_CARDS);
         boolean[] cardOnBoard = savedInstanceState.getBooleanArray(STATE_ON_BOARD);
         boolean[] cardFaceUp = savedInstanceState.getBooleanArray(STATE_FACE_UP);
+        totalMatches = savedInstanceState.getInt(STATE_MATCHES);
 
         gameBoard = (TableLayout)findViewById(R.id.versusLayout);
         context = gameBoard.getContext();
