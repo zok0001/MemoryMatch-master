@@ -193,6 +193,8 @@ public class VersusMode extends FragmentActivity {
         cardBacks.add(R.drawable.cam);
         cardBacks.add(R.drawable.logo);
         cardBacks.add(R.drawable.charles);
+        cardBacks.add(R.drawable.toomers);
+        cardBacks.add(R.drawable.aulogo);
 
         cardBacks.add(R.drawable.gus);
         cardBacks.add(R.drawable.nova);
@@ -204,6 +206,8 @@ public class VersusMode extends FragmentActivity {
         cardBacks.add(R.drawable.cam);
         cardBacks.add(R.drawable.logo);
         cardBacks.add(R.drawable.charles);
+        cardBacks.add(R.drawable.toomers);
+        cardBacks.add(R.drawable.aulogo);
 
     }
 
@@ -214,7 +218,7 @@ public class VersusMode extends FragmentActivity {
      *
      * */
     private void initialize() {
-        ROW = 5;
+        ROW = 6;
         COL = 4;
 
         //Add Table row which will contain array and columns of table layouts of views (Image Buttons)
