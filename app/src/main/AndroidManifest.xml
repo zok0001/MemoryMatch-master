@@ -33,7 +33,8 @@
         </activity>
 
         <activity android:name="edu.auburn.eng.csse.comp3710.team17.MemoryGame"
-            android:label="@string/title_memory_game" >
+            android:label="@string/title_memory_game"
+            android:configChanges="orientation|screenSize">
 
         </activity>
 
