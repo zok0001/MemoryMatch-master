@@ -21,8 +21,9 @@ import java.util.Scanner;
  * Created by Zack on 4/30/2015.
  */
 public class ViewScoreboardActivity extends FragmentActivity {
-    final static String MODE = "mode"; // Game mode being played 1 = Classic 2 = Timed
-    final static String DIFFICULTY = "difficulty"; // Difficulty being played on
+    final static String STATE_MODE = "modee"; // Game mode being played 1 = Classic 2 = Timed
+    final static String STATE_DIFFICULTY = "difficulty"; // Difficulty being played on
+    final static String STATE_SELECTED = "selected";
     private ArrayList<TopScore> topScores = new ArrayList<>();
     private int numTopScores = 0;
     private String filename;
@@ -34,6 +35,7 @@ public class ViewScoreboardActivity extends FragmentActivity {
     private TextView topScoreboardView;
     private Spinner scoreSpinner;
     private String topViewString;
+    private boolean selected;
 
     public void readScores() {
         String scoreboard = "";
@@ -118,6 +120,7 @@ public class ViewScoreboardActivity extends FragmentActivity {
         topScoreboardView = (TextView) findViewById(R.id.top_scoreboard_view);
         viewingScores = (TextView) findViewById(R.id.viewing_scores);
         scoreSpinner = (Spinner) findViewById((R.id.scoreSpinner));
+        selected = false;
 
 
         mainMenuButton.setOnClickListener(new Button.OnClickListener() {
@@ -173,6 +176,7 @@ public class ViewScoreboardActivity extends FragmentActivity {
                 getFile();
                 setTopTextView();
                 readScores();
+                selected = true;
             }
 
             @Override
@@ -204,5 +208,27 @@ public class ViewScoreboardActivity extends FragmentActivity {
                 break;
         }
         topScoreboardView.setText("Mode: " + modeString + "\nDifficulty: " + difficultyString);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        if (selected) {
+            savedInstanceState.putInt(STATE_DIFFICULTY, difficulty);
+            savedInstanceState.putInt(STATE_MODE, mode);
+        }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        difficulty = savedInstanceState.getInt(STATE_DIFFICULTY);
+        mode = savedInstanceState.getInt(STATE_MODE);
+        numTopScores = 0;
+        topScores = new ArrayList<>();
+        viewingScores.setText("");
+        getFile();
+        setTopTextView();
+        readScores();
+        selected = true;
+
     }
 }
