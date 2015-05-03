@@ -1,9 +1,10 @@
 @startuml
 title Memory Match Class Diagram
-class UpdateHandler <<(A,orchid) >>{
+class UpdateHandler {
 checkMatch()
 }
-
+class User {
+}
 class Card {
 match
 id
@@ -13,20 +14,10 @@ facedown()
 equals()
 turnOver()
 }
-class MainActivity{
-classicButton
-timedButton
-onCreate()
-onCreateOptionsMenu()
-onOptionsItemSelected()
-}
+
 class SplashScreen{
-displayTime
-onCreate()
-onDestroy()
 }
 class MenuActivity{
-onCreate()
 runClassicGame()
 runTimedGame()
 viewScore()
@@ -49,7 +40,6 @@ totalTime
 finalTime
 totalMatches
 curDifficulty
-onCreate()
 readSCores()
 addScores()
 loadPictures()
@@ -58,7 +48,7 @@ turnFaceUp()
 canAddScores()
 startTimer()
 }
-class ViewScoreBoardsActivity{
+class ViewScoreboard{
 topScores
 numTopScores
 fileName
@@ -67,10 +57,23 @@ mode
 hiScoreFile
 readScore()
 getFile()
-onCreate()
-onStart()
 setTopTextView()
 }
+class HighScoreArchive <<F,orchid) >> {
+}
+class HowToPlay {
+}
 
+MemoryGame "1" *-- "12,16,20" Card : contains >
+MemoryGame "1" *-- "1" UpdateHandler: contains >
+User -- MemoryGame: plays >
+User -- SplashScreen: views >
+User -- MenuActivity: selects game mode >
+UpdateHandler -- Card : checks match >
+MenuActivity -- MemoryGame : starts >
+User -- ViewScoreboard : views >
+MemoryGame -- HighScoreArchive : adds score >
+ViewScoreboard -- HighScoreArchive : retrieve scores >
+User -- HowToPlay : views >
 
 @enduml

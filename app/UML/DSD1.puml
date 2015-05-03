@@ -1,0 +1,44 @@
+@startuml
+title AuburnMatch Design SD: Play Classic or Timed Mode
+
+User -> MenuActivity : open
+User <-- MenuActivity : game modes
+User -> MenuActivity : select game mode
+User <-- MenuActivity : list of difficulties
+User -> MenuActivity : select difficulty
+MenuActivity -> MemoryGame : start game
+User <-- MemoryGame : game board
+alt in timed mode
+MemoryGame -> Handler : start timer
+end
+loop until all cards matched
+User -> MemoryGame: select first card
+MemoryGame -> Card : get first image
+MemoryGame <-- Card : first image
+User <-- MemoryGame : first card image
+User -> MemoryGame : select second card
+MemoryGame -> Card : get second image
+MemoryGame <-- Card : second image
+User <-- MemoryGame : second card image
+MemoryGame -> Handler : check match
+alt cards match
+MemoryGame -> Card : remove cards
+User <-- MemoryGame : updated board
+else cards do not match
+MemoryGame -> Card : turn cards over
+User <-- MemoryGame : updated board
+end
+end
+alt in timed mode
+MemoryGame -> Handler : stop timer
+MemoryGame <-- Handler : total time
+end
+User -> MemoryGame : enter initials
+MemoryGame -> HighScoreArchive : check score
+MemoryGame <-- HighScoreArchive : can be added
+alt score good enough to be saved
+MemoryGame -> HighScoreArchive : add current score
+MemoryGame <-- HighScoreArchive : score added successfully
+end
+
+@enduml
