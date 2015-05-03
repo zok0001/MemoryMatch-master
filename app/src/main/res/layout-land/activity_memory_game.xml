@@ -4,9 +4,10 @@
     android:layout_height="match_parent"
     android:scrollbars="none"
     android:layout_weight="1">
+
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/TableLayout01"
         android:background="@color/backgroundColor" >
         <!-- android:background="@drawable/splashvert"> -->

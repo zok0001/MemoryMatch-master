@@ -51,6 +51,7 @@ public class Card {
      * if a match, make invisible, else change image to back
      * */
     public void faceDown() {
+        setFaceDown();
         if (!this.match) {
             this.button.setBackgroundResource(R.drawable.auback);
         } else {

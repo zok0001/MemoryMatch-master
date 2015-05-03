@@ -836,8 +836,8 @@ public class MemoryGame extends FragmentActivity {
                         card1.faceDown();
                     }
                     if (cardFaceUp[index]) {
-                        card1.setFaceUp();
                         selection1 = card1;
+                        selection1.setFaceUp();
                         selection1.turnOver();
                     } else {
                         card1.faceDown();
