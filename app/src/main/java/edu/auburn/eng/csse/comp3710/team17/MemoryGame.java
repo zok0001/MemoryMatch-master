@@ -99,6 +99,9 @@ public class MemoryGame extends FragmentActivity {
     static final String STATE_FACE_UP = "faceUp";
     static final String STATE_ROW = "row";
     static final String STATE_COLUMN = "column";
+    static final String STATE_GAME_OVER = "gameOver";
+    static final String STATE_DIFFICULTY = "difficulty";
+    static final String STATE_FINAL_TIME = "finalTime";
 
 
     @Override
@@ -514,7 +517,7 @@ public class MemoryGame extends FragmentActivity {
                     String scoreType = (mode == 1) ? "moves" : "seconds";
                     String youWin = "Congratulations! You beat " + modeString + "\nmode on difficulty "
                             + difficultyString + " in " + finalScore + " " + scoreType;
-                    youWin += "\nEnter your initials to submit your score! (3 Characters)";
+                    youWin += "\nEnter your initials to submit your score!\n(3 Characters)";
                     winningText.setText(youWin);
                     submitButton.setText("SUBMIT");
                     winningText.setVisibility(View.VISIBLE);
@@ -757,10 +760,13 @@ public class MemoryGame extends FragmentActivity {
             savedInstanceState.putInt(STATE_MATCHES, tm);
             savedInstanceState.putBoolean(STATE_DIFFICULTY_CHOSEN, difficultyChosen);
             savedInstanceState.putInt(STATE_MODE, mode);
+            savedInstanceState.putBoolean(STATE_GAME_OVER, gameOver);
+            savedInstanceState.putInt(STATE_DIFFICULTY, curDifficulty);
             if (mode == 1)
                 savedInstanceState.putInt(STATE_SCORE, tries);
             else
                 savedInstanceState.putInt(STATE_SCORE, totalTime);
+                savedInstanceState.putInt(STATE_FINAL_TIME, finalTime);
 
         }
 
@@ -773,12 +779,14 @@ public class MemoryGame extends FragmentActivity {
             difficultyChosen = true;
             gameBoard.removeView(findViewById(R.id.TableRow01));
             mode = savedInstanceState.getInt(STATE_MODE);
+            curDifficulty = savedInstanceState.getInt(STATE_DIFFICULTY);
             ROW = savedInstanceState.getInt(STATE_ROW);
             COL = savedInstanceState.getInt(STATE_COLUMN);
             int[] cardIDs = savedInstanceState.getIntArray(STATE_CARDS);
             boolean[] cardOnBoard = savedInstanceState.getBooleanArray(STATE_ON_BOARD);
             boolean[] cardFaceUp = savedInstanceState.getBooleanArray(STATE_FACE_UP);
             totalMatches = savedInstanceState.getInt(STATE_MATCHES);
+            gameOver = savedInstanceState.getBoolean(STATE_GAME_OVER);
 
             gameBoard = (TableLayout)findViewById(R.id.TableLayout01);
             context = gameBoard.getContext();
@@ -828,6 +836,27 @@ public class MemoryGame extends FragmentActivity {
                 //counter of total tries
                 tries = savedInstanceState.getInt(STATE_SCORE);
                 ((TextView) findViewById(R.id.textTries)).setText("Total Turns: " + tries);
+            }
+
+            if (gameOver) {
+                finalTime = savedInstanceState.getInt(STATE_FINAL_TIME);
+                finalScore = (mode == 1) ? tries : finalTime;
+                Toast.makeText(context, "Congratulations! You win!", Toast.LENGTH_SHORT).show();
+
+                String modeString = (mode == 1) ? "Classic" : "Timed";
+                String difficultyString;
+                if (curDifficulty == 0) difficultyString = "Easy";
+                else if (curDifficulty == 1) difficultyString = "Normal";
+                else difficultyString = "Hard";
+                String scoreType = (mode == 1) ? "moves" : "seconds";
+                String youWin = "Congratulations! You beat " + modeString + "\nmode on difficulty "
+                        + difficultyString + " in " + finalScore + " " + scoreType;
+                youWin += "\nEnter your initials to submit your score!\n(3 Characters)";
+                winningText.setText(youWin);
+                submitButton.setText("SUBMIT");
+                winningText.setVisibility(View.VISIBLE);
+                submitButton.setVisibility(View.VISIBLE);
+                editInitials.setVisibility(View.VISIBLE);
             }
 
         }

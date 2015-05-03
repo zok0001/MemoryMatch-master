@@ -5,7 +5,10 @@ Version: 1.2
 
 -What's New
 Resolved a bug where games would not recognize they had been completed after an orientation change.
-Added more cards to the Hard difficulty to increase difficulty.
+Added more cards to the Hard difficulty to increase difficulty. Fixed bug where if screen orientation
+changed during game play, the final score would be saved to the Classic-Easy high score list instead
+of the actual Mode-Difficulty score list. Fixed bug where final score would not be saved if screen
+orientation was changed after the game was already completed.
 -Features and changes
     -Splash Screen (0.1)
     -Main Menu (0.1)
