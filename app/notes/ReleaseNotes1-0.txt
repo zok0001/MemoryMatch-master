@@ -25,5 +25,5 @@ from the beta release has been resolved!
     -Install AuburnMatch.apk
 -Known Issues
     -App currently loses state when screen orientation changes. For this reason, all parts of
-     AuburnMatch are currently locked to portait mode.
+     AuburnMatch are currently locked to portrait mode.
 
