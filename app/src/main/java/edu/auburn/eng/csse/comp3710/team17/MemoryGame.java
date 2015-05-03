@@ -350,20 +350,8 @@ public class MemoryGame extends FragmentActivity {
                         finalScore = tries;
                     }
                     gameOver = true;
-                    // TODO: END OF GAME SEQUENCE
-                    // CHECK TO SEE IF THE FINAL SCORE OF THE CURRENT PLAY IS GOOD ENOUGH TO BE
-                    // ADDED TO THE SCOREBOARD FOR THAT MODE AND DIFFICULTY. IF IT IS, LAUNCH THE
-                    // FRAGMENT TO ADD THE SCORE. IF IT IS NOT, LAUNCH THE FRAGMENT TO SIMPLY VIEW
-                    // THE HIGH SCORES.
-                    // if (canAddScore()) {
-                    //     //LAUNCH ScoreboardAddFragment
-                    // }
-                    // else {
-                        //LAUNCH ScoreboardViewFragment
-                    //}
-                    Toast.makeText(context, "Congratulations! You win!", Toast.LENGTH_SHORT).show();
 
-                    /** UNCOMMENT THIS SECTION TO SEE THE OTHER WAY */
+                    Toast.makeText(context, "Congratulations! You win!", Toast.LENGTH_SHORT).show();
 
                     String modeString = (mode == 1) ? "Classic" : "Timed";
                     String difficultyString;
@@ -379,23 +367,6 @@ public class MemoryGame extends FragmentActivity {
                     winningText.setVisibility(View.VISIBLE);
                     submitButton.setVisibility(View.VISIBLE);
                     editInitials.setVisibility(View.VISIBLE);
-
-
-
-                    /** THIS IS THE FIRST WAY I TRIED
-                    // Reset the game after a short delay
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(MemoryGame.this, MenuActivity.class);
-                            intent.putExtra("mode", mode);
-                            intent.putExtra("score", finalScore);
-                            intent.putExtra("difficulty", curDifficulty);
-                            intent.putExtra("gameOver", true);
-                            startActivity(intent);
-                            finish();
-                       }
-                    }, 1400); */
                 }
             }
             else {

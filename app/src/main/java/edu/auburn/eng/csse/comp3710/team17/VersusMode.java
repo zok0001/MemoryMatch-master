@@ -61,6 +61,15 @@ public class VersusMode extends FragmentActivity {
 
     TextView pOneMatchView;
     TextView pTwoMatchView;
+
+    static final String STATE_CARDS = "cards";
+    static final String STATE_ON_BOARD = "onBoard";
+    static final String STATE_FACE_UP = "faceUp";
+    static final String STATE_ROW = "row";
+    static final String STATE_COLUMN = "column";
+    static final String STATE_P1_SCORE = "pOneScore";
+    static final String STATE_P2_SCORE = "pTwoScore";
+    static final String STATE_WHOSE_TURN_IS_IT_ANYWAY = "turn";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +86,10 @@ public class VersusMode extends FragmentActivity {
         gameBoard = (TableLayout)findViewById(R.id.versusLayout);
         // Initialize game board
         context = gameBoard.getContext();
-        loadPictures();
-        initialize();
+        if (savedInstanceState ==  null) {
+            loadPictures();
+            initialize();
+        }
         gameOver = false;
 
         pOneMatches = 0;
@@ -117,6 +128,7 @@ public class VersusMode extends FragmentActivity {
                 selection1.faceDown();
                 selection2.faceDown();
                 totalMatches++;
+
                 if (p1Turn) pOneMatches++;
                 else pTwoMatches++;
 
@@ -146,6 +158,8 @@ public class VersusMode extends FragmentActivity {
                 //no match, turn cards back over, set selections to null
                 selection1.faceDown();
                 selection2.faceDown();
+                selection1.setFaceDown();
+                selection2.setFaceDown();
                 if (p1Turn) {
                     Toast.makeText(context, "Player Two's turn", Toast.LENGTH_SHORT).show();
                     p1Turn = false;
@@ -286,10 +300,12 @@ public class VersusMode extends FragmentActivity {
             if(selection1 == null) {
                 selection1 = cardList.get(id);
                 selection1.turnOver();
+                selection1.setFaceUp();
             } else {
                 //second card selection turn over card and allow handler to determine match
                 selection2 = cardList.get(id);
                 selection2.turnOver();
+                selection2.setFaceUp();
                 TimerTask task = new TimerTask() {
 
                     //ensures user has ample time to see both card images before game determines whether they match
@@ -314,5 +330,91 @@ public class VersusMode extends FragmentActivity {
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        int totalCards = ROW * COL;
+        int[] cardIDs = new int[totalCards];
+        boolean[] cardOnBoard = new boolean[totalCards];
+        boolean[] cardFaceUp = new boolean[totalCards];
+
+        for (Card c : cardList) {
+            int index = c.getButton().getId();
+            boolean matched = c.getMatch();
+            boolean faceUp = c.isFaceUp();
+            cardIDs[index] = c.getId();
+            cardOnBoard[index] = matched;
+            cardFaceUp[index] = faceUp;
+        }
+        savedInstanceState.putIntArray(STATE_CARDS, cardIDs);
+        savedInstanceState.putBooleanArray(STATE_ON_BOARD, cardOnBoard);
+        savedInstanceState.putBooleanArray(STATE_FACE_UP, cardFaceUp);
+        savedInstanceState.putInt(STATE_ROW, ROW);
+        savedInstanceState.putInt(STATE_COLUMN, COL);
+        savedInstanceState.putInt(STATE_P1_SCORE, pOneMatches);
+        savedInstanceState.putInt(STATE_P2_SCORE, pTwoMatches);
+        savedInstanceState.putBoolean(STATE_WHOSE_TURN_IS_IT_ANYWAY, p1Turn);
+
+
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        gameBoard.removeView(findViewById(R.id.TableRow01));
+        ROW = savedInstanceState.getInt(STATE_ROW);
+        COL = savedInstanceState.getInt(STATE_COLUMN);
+        int[] cardIDs = savedInstanceState.getIntArray(STATE_CARDS);
+        boolean[] cardOnBoard = savedInstanceState.getBooleanArray(STATE_ON_BOARD);
+        boolean[] cardFaceUp = savedInstanceState.getBooleanArray(STATE_FACE_UP);
+
+        gameBoard = (TableLayout)findViewById(R.id.versusLayout);
+        context = gameBoard.getContext();
+        TableRow newRow = ((TableRow)findViewById(R.id.versusRow02));
+        newRow.removeAllViews();
+        gameBoard = new TableLayout(context);
+        newRow.addView(gameBoard);
+        selection1 = null;
+        selection2 = null;
+
+        for (int rows = 0; rows < ROW; rows++) {
+            TableRow row = new TableRow(context);
+            row.setHorizontalGravity(Gravity.CENTER);
+            for (int cols = 0; cols < COL; cols++) {
+                int index = (rows * COL) + cols;
+                ImageButton button = new ImageButton(context);
+                button.setId(index);
+                button.setOnClickListener(buttonListener);
+                //adding to buttonlist possibly not needed?
+                buttonList.add(button);
+                row.addView(button);
+                //important, creates a card using this newly created button and passed index to be used as id
+                Card card1 = new Card(button, cardIDs[index],
+                        getResources().getDrawable(cardIDs[index]));
+                if (cardOnBoard[index]) {
+                    card1.setMatch();
+                    card1.faceDown();
+                }
+                if (cardFaceUp[index]) {
+                    selection1 = card1;
+                    selection1.setFaceUp();
+                    selection1.turnOver();
+                } else {
+                    card1.faceDown();
+                }
+                cardList.add(card1);
+            }
+            gameBoard.addView(row);
+        }
+        pOneMatches = savedInstanceState.getInt(STATE_P1_SCORE);
+        pTwoMatches = savedInstanceState.getInt(STATE_P2_SCORE);
+        p1Turn = savedInstanceState.getBoolean(STATE_WHOSE_TURN_IS_IT_ANYWAY);
+        pOneMatchView.setText("Player 1 matches: " + pOneMatches);
+        pTwoMatchView.setText("Player 2 matches: " + pTwoMatches);
+
+
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
 }
