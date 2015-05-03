@@ -1,0 +1,10 @@
+@startuml
+title AuburnMatch: View High Scores
+User -> MenuActivity : selects View High Scores
+MenuActivity -> ViewScoreboard : starts
+User <-- ViewScoreboard : list of game modes
+User -> ViewScoreboard : select game mode
+ViewScoreboard -> HighScoreArchive : retrieve scores
+ViewScoreboard <-- HighScoreArchive : high scores
+User <-- ViewScoreboard : high scores
+@enduml

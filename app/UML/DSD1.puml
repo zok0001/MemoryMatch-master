@@ -1,5 +1,5 @@
 @startuml
-title AuburnMatch Design SD: Play Classic or Timed Mode
+title AuburnMatch Design SD: Play Game
 
 User -> MenuActivity : open
 User <-- MenuActivity : game modes
