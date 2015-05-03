@@ -1,0 +1,76 @@
+@startuml
+title Memory Match Class Diagram
+class UpdateHandler <<(A,orchid) >>{
+checkMatch()
+}
+
+class Card {
+match
+id
+back
+facedown
+facedown()
+equals()
+turnOver()
+}
+class MainActivity{
+classicButton
+timedButton
+onCreate()
+onCreateOptionsMenu()
+onOptionsItemSelected()
+}
+class SplashScreen{
+displayTime
+onCreate()
+onDestroy()
+}
+class MenuActivity{
+onCreate()
+runClassicGame()
+runTimedGame()
+viewScore()
+versusMode()
+showHowToPlay()
+makeMenuVisable()
+onResume()
+onMenuPressed()
+}
+class MemoryGame{
+cardList[]
+buttonList[]
+gameBoard
+selection1
+selection2
+gameTimer
+mode
+tries
+totalTime
+finalTime
+totalMatches
+curDifficulty
+onCreate()
+readSCores()
+addScores()
+loadPictures()
+initialize()
+turnFaceUp()
+canAddScores()
+startTimer()
+}
+class ViewScoreBoardsActivity{
+topScores
+numTopScores
+fileName
+difficulty
+mode
+hiScoreFile
+readScore()
+getFile()
+onCreate()
+onStart()
+setTopTextView()
+}
+
+
+@enduml
