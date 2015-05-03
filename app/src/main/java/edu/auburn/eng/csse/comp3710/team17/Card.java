@@ -1,10 +1,6 @@
 package edu.auburn.eng.csse.comp3710.team17;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.widget.Button;
 import android.graphics.drawable.Drawable;
-import java.util.List;
 import android.widget.ImageButton;
 import android.view.View;
 
@@ -12,7 +8,6 @@ public class Card {
 
     //button of card displays image
     public ImageButton button;
-    private int index;
     //whether card has been matched in game
     private boolean match;
     //id used to determine if cards are identical

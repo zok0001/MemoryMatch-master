@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * Created by Zack on 5/2/2015.
- */
+
 public class HowToPlayFragment extends Fragment {
     private TextView htpText;
     private Button backToMenuButton;

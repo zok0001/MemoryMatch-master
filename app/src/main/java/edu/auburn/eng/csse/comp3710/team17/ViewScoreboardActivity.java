@@ -1,12 +1,9 @@
 package edu.auburn.eng.csse.comp3710.team17;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,9 +18,8 @@ import java.util.Scanner;
  * Created by Zack on 4/30/2015.
  */
 public class ViewScoreboardActivity extends FragmentActivity {
-    final static String STATE_MODE = "modee"; // Game mode being played 1 = Classic 2 = Timed
+    final static String STATE_MODE = "mode"; // Game mode being played 1 = Classic 2 = Timed
     final static String STATE_DIFFICULTY = "difficulty"; // Difficulty being played on
-    final static String STATE_SELECTED = "selected";
     private ArrayList<TopScore> topScores = new ArrayList<>();
     private int numTopScores = 0;
     private String filename;
@@ -34,7 +30,6 @@ public class ViewScoreboardActivity extends FragmentActivity {
     private TextView viewingScores;
     private TextView topScoreboardView;
     private Spinner scoreSpinner;
-    private String topViewString;
     private boolean selected;
 
     public void readScores() {
@@ -216,6 +211,7 @@ public class ViewScoreboardActivity extends FragmentActivity {
             savedInstanceState.putInt(STATE_DIFFICULTY, difficulty);
             savedInstanceState.putInt(STATE_MODE, mode);
         }
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
@@ -229,6 +225,6 @@ public class ViewScoreboardActivity extends FragmentActivity {
         setTopTextView();
         readScores();
         selected = true;
-
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }

@@ -1,11 +1,7 @@
 package edu.auburn.eng.csse.comp3710.team17;
 
-import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import java.io.File;
@@ -14,13 +10,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import android.view.Menu;
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.content.Context;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Button;
@@ -31,7 +25,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TableRow;
-import android.view.View;
 import android.view.Gravity;
 
 import java.util.Scanner;
@@ -53,12 +46,12 @@ public class MemoryGame extends FragmentActivity {
 
     private UpdateHandler handler;
     //public List<Integer> cardIds = new ArrayList<Integer>();
-    private List<Card> cardList = new ArrayList<Card>();
+    private List<Card> cardList = new ArrayList<>();
     
     //array list of card images
-    List<Integer> cardBacks = new ArrayList<Integer>();
+    List<Integer> cardBacks = new ArrayList<>();
     
-    List<ImageButton> buttonList = new ArrayList<ImageButton>();
+    List<ImageButton> buttonList = new ArrayList<>();
 
     private Context context;
     private Drawable backPic;

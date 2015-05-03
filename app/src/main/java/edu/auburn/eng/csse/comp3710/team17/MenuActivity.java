@@ -1,16 +1,12 @@
 package edu.auburn.eng.csse.comp3710.team17;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 public class MenuActivity extends FragmentActivity
         implements HowToPlayFragment.OnMenuButtonClickedListener {
