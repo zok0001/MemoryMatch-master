@@ -92,6 +92,7 @@ public class MemoryGame extends FragmentActivity {
     static final String STATE_MODE = "mode";
     static final String STATE_SCORE = "score";
     static final String STATE_DIFFICULTY_CHOSEN = "chosen";
+    static final String STATE_MATCHES = "matches";
 
     static final String STATE_CARDS = "cards";
     static final String STATE_ON_BOARD = "onBoard";
